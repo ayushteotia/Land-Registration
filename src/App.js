@@ -23,10 +23,12 @@ function App() {
         return async () => {
             const web3 = getWeb3();
             let accounts = await web3.eth.getAccounts();
+            console.log(web3);
             if (accounts.length <= 0) {
                 await web3.eth.requestAccounts();
                 accounts = (await web3.eth.getAccounts())[0];
             }
+            console.log(accounts);
             if (
                 window.localStorage.getItem("account_hash") !== accounts[0] ||
                 !window.localStorage.getItem("account_type") ||
