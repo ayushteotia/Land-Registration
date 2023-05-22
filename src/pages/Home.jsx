@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import getWeb3 from "../getWeb3";
 
 function Home() {
     const to = useNavigate();
     const [auth, setAuth] = useState("");
+    const [address] = useState(window.localStorage.getItem("account_hash") || "");
 
     useEffect(() => {
         return () => {
@@ -14,6 +16,12 @@ function Home() {
             }
         };
     });
+
+    const connect = async () => {
+        const web3 = getWeb3();
+        await window.ethereum.request({ method: "eth_requestAccounts" });
+        window.location.reload(Home);
+    }
 
     return (
         <div className="container">
@@ -47,6 +55,7 @@ function Home() {
                             Register
                         </Link>
                     </form>
+                    {!address ? (<button className="btn btn-success col-12 mt-2" onClick={connect}>Connect Wallet</button>) : <></>}
                 </div>
             </div>
         </div>

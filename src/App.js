@@ -22,10 +22,8 @@ function App() {
     useEffect(() => {
         return async () => {
             const web3 = getWeb3();
-            let accounts = await web3.eth.getAccounts();
-            if (accounts.length === 0) {
-                accounts = await web3.eth.requestAccounts();
-            } else {
+            const accounts = await web3.eth.getAccounts();
+            if (accounts) {
                 if (
                     window.localStorage.getItem("account_hash") !== accounts[0] ||
                     !window.localStorage.getItem("account_type") ||
