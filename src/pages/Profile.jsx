@@ -19,6 +19,7 @@ function Profile() {
                 setIsVerified(isVerified);
                 const isRejected = await app.methods.isRejected(account).call();
                 setIsRejected(isRejected);
+                console.log(user);
             } else if (account_type === "seller") {
                 const user = await app.methods.getSellerDetails(account).call();
                 setUser(user);
