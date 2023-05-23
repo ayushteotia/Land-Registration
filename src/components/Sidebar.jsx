@@ -5,7 +5,7 @@ function Sidebar({ page }) {
     const [accountType] = useState(window.localStorage.getItem("account_type"));
 
     return (
-        <div id="wrapper">
+        <div id="wrapper" style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
             <ul className="navbar-nav sidebar sidebar-dark">
                 <span className="sidebar-brand d-flex align-items-center justify-content-center">
                     <span className="fs-4">{page}</span>

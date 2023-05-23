@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useMetamask } from "../connectWallet";
 
 function Home() {
     const to = useNavigate();
     const [auth, setAuth] = useState("");
+    const [address] = useState(window.localStorage.getItem("account_hash") || null);
+    const { handleOnboarding } = useMetamask();
 
     useEffect(() => {
         return () => {
@@ -47,6 +50,13 @@ function Home() {
                             Register
                         </Link>
                     </form>
+                    {!address ? (
+                        <button className="btn btn-success col-12 mt-2" onClick={handleOnboarding}>
+                            Connect
+                        </button>
+                    ) : (
+                        <span className="badge rounded-pill text-bg-success">{address}</span>
+                    )}
                 </div>
             </div>
         </div>
