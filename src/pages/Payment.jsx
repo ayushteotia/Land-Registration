@@ -19,7 +19,7 @@ function Payment() {
                 setLands((lands) => [...lands, { owner, price, isPaid }]);
             }
         };
-    }, []);
+    }, [account]);
 
     const makePayment = async (seller_address, amount, land_id) => {
         console.log(amount, typeof amount);

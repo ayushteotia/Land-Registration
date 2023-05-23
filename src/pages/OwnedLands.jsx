@@ -23,7 +23,7 @@ function OwnedLands() {
                 setLands((lands) => [...lands, { area, city, state, price, propertyPID, surveyNum, image }]);
             }
         };
-    }, []);
+    }, [account]);
 
     return (
         <div id="wrapper">

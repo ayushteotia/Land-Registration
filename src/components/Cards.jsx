@@ -24,7 +24,7 @@ function Cards() {
                 setValues([buyersCount, sellersCount, requestsCount]);
             }
         };
-    }, []);
+    }, [account]);
 
     return (
         <div className="row">
