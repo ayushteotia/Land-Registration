@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import getWeb3 from "../getWeb3";
 import { app } from "../config";
 import { getHash } from "../getIPFS";
 
 function Seller() {
-    const to = useNavigate();
     const [name, setName] = useState("");
     const [age, setAge] = useState("");
     const [ownedLands, setOwnedLands] = useState("");
