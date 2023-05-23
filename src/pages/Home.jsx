@@ -5,8 +5,8 @@ import { useMetamask } from "../connectWallet";
 function Home() {
     const to = useNavigate();
     const [auth, setAuth] = useState("");
-    const [address] = useState(window.localStorage.getItem("account_hash") || null);
-    const { handleOnboarding } = useMetamask();
+    const { account, handleOnboarding } = useMetamask();
+    const [address] = useState(window.localStorage.getItem("account_hash") || account);
 
     useEffect(() => {
         return () => {

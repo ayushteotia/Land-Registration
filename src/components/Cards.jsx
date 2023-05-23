@@ -12,6 +12,7 @@ function Cards() {
             const buyersCount = await app.methods.getBuyersCount().call();
             const landsCount = await app.methods.getLandsCount().call();
             const requestsCount = await app.methods.getRequestedLandsCount().call();
+            console.log("Data", sellersCount, buyersCount, landsCount, requestsCount);
             if (account === "buyer") {
                 setKeys(["Total Sellers", "Registered Land Counts", "Total Requests"]);
                 setValues([sellersCount, landsCount, requestsCount]);
@@ -23,7 +24,7 @@ function Cards() {
                 setValues([buyersCount, sellersCount, requestsCount]);
             }
         };
-    });
+    }, []);
 
     return (
         <div className="row">

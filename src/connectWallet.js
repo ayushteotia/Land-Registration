@@ -1,17 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import MetaMaskOnboarding from "@metamask/onboarding";
-// import { MetaMaskInpageProvider } from "@metamask/providers";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { app } from "./config";
 
 export const useMetamask = () => {
     const [account, setAccount] = useState("");
-    const [ethereum, setEthereum] = useState(null);
     const onboarding = useRef();
 
     function handleOnboarding() {
         if (MetaMaskOnboarding.isMetaMaskInstalled()) {
-            ethereum?.request({ method: "eth_requestAccounts" }).then(async (accounts) => {
+            window.ethereum?.request({ method: "eth_requestAccounts" }).then(async (accounts) => {
                 console.log("2", accounts);
                 if (
                     window.localStorage.getItem("account_hash") !== accounts[0] ||
@@ -65,17 +63,14 @@ export const useMetamask = () => {
         if (!onboarding.current) onboarding.current = new MetaMaskOnboarding();
         detectEthereumProvider().then((provider) => {
             if (!provider) return;
-            setEthereum(provider);
+            window.ethereum = provider;
             console.log(provider);
         });
+        if (window.ethereum) {
+            handleAccountChange();
+            window.ethereum?.on("accountsChanged", handleAccountChange);
+        }
     }, []);
 
-    useEffect(() => {
-        if (ethereum) {
-            handleAccountChange();
-            ethereum?.on("accountsChanged", handleAccountChange);
-        }
-    }, [ethereum]);
-
-    return { ethereum, handleOnboarding };
+    return { account, handleOnboarding };
 };
