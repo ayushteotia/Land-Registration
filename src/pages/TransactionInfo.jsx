@@ -22,7 +22,6 @@ function TransactionInfo() {
                 const propertyPID = await app.methods.getPID(i).call();
                 const surveyNum = await app.methods.getSurveyNumber(i).call();
                 setLands((lands) => [...lands, { area, city, state, price, propertyPID, surveyNum, owner, isPaid, newOwner: request[1] }]);
-                console.log(isPaid);
             }
         };
     }, []);

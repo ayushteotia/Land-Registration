@@ -19,7 +19,6 @@ function Profile() {
                 setIsVerified(isVerified);
                 const isRejected = await app.methods.isRejected(account).call();
                 setIsRejected(isRejected);
-                console.log(user);
             } else if (account_type === "seller") {
                 const user = await app.methods.getSellerDetails(account).call();
                 setUser(user);
@@ -32,23 +31,6 @@ function Profile() {
             }
         };
     }, [account, account_type]);
-
-    // const editProfile = () => {
-    //     const fields = document.getElementsByTagName("input");
-    //     for (let i = 1; i < fields.length - 2; i++) fields[i].removeAttribute("readOnly");
-    //     document.getElementById("edit").hidden = true;
-    //     document.getElementById("update").hidden = false;
-    // };
-
-    // const updateProfile = async () => {
-    //     if (account_type === "buyer") {
-    //     } else if (account_type === "seller") {
-    //     }
-    //     const fields = document.getElementsByTagName("input");
-    //     for (let i = 1; i < fields.length - 2; i++) fields[i].setAttribute("readOnly", true);
-    //     document.getElementById("edit").hidden = false;
-    //     document.getElementById("update").hidden = true;
-    // };
 
     return (
         <div id="wrapper">

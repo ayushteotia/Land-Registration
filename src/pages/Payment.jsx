@@ -22,7 +22,6 @@ function Payment() {
     }, [account]);
 
     const makePayment = async (seller_address, amount, land_id) => {
-        console.log(amount, typeof amount);
         amount *= 0.0000057;
         await app.methods.payment(seller_address, land_id).send({
             from: account,

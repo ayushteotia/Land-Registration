@@ -13,8 +13,6 @@ function LandRequest() {
             for (let i = 1; i <= requestsCount; i++) {
                 const request = await app.methods.getRequestDetails(i).call();
                 const approved = await app.methods.isApproved(i).call();
-                console.log(address);
-                console.log(request);
                 if (address === request[0]) {
                     request[4] = approved;
                     setRequests((requests) => [...requests, request]);

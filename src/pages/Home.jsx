@@ -6,7 +6,6 @@ function Home() {
     const to = useNavigate();
     const [auth, setAuth] = useState("");
     const { account, handleOnboarding } = useMetamask();
-    const [address] = useState(window.localStorage.getItem("account_hash") || account);
 
     useEffect(() => {
         return () => {
@@ -50,12 +49,12 @@ function Home() {
                             Register
                         </Link>
                     </form>
-                    {!address ? (
+                    {account.length <= 0 ? (
                         <button className="btn btn-success col-12 mt-2" onClick={handleOnboarding}>
                             Connect
                         </button>
                     ) : (
-                        <span className="badge rounded-pill text-bg-success">{address}</span>
+                        <span className="badge rounded-pill text-bg-success">{account}</span>
                     )}
                 </div>
             </div>
