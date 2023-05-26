@@ -9,9 +9,7 @@ module.exports = {
             network_id: "5777",
         },
         sepolia: {
-            provider: function () {
-                return new HDWalletProvider(MNEMONIC, "wss://sepolia.infura.io/ws/v3/" + INFURA_API_KEY);
-            },
+            provider: () => new HDWalletProvider(MNEMONIC, "wss://sepolia.infura.io/ws/v3/" + INFURA_API_KEY),
             network_id: "11155111",
             gas: 30000000,
         },

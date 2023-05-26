@@ -21,16 +21,19 @@ function TransactionInfo() {
                 const price = await app.methods.getPrice(i).call();
                 const propertyPID = await app.methods.getPID(i).call();
                 const surveyNum = await app.methods.getSurveyNumber(i).call();
-                setLands((lands) => [...lands, { area, city, state, price, propertyPID, surveyNum, owner, isPaid, newOwner: request[1] }]);
+                setLands((lands) => [...lands, { area, city, state, price, propertyPID, surveyNum, owner, isPaid, newOwner: request[1], id: i }]);
             }
         };
     }, []);
 
     const landTransfer = async (landId, newOwner) => {
-        await app.methods.LandOwnershipTransfer(landId, newOwner).send({
-            from: account,
-            gas: 2100000,
-        });
+        await app.methods
+            .LandOwnershipTransfer(landId, newOwner)
+            .send({
+                from: account,
+                gas: 2100000,
+            })
+            .then(() => window.location.reload());
     };
 
     return (
@@ -76,7 +79,7 @@ function TransactionInfo() {
                                                             <td>
                                                                 <button
                                                                     className="btn btn-primary"
-                                                                    onClick={() => landTransfer(index + 1, element.newOwner)}
+                                                                    onClick={() => landTransfer(element.id, element.newOwner)}
                                                                     disabled={!element.isPaid}
                                                                 >
                                                                     Verify Transaction

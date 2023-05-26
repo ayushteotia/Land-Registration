@@ -13,21 +13,24 @@ function Payment() {
             const count = await app.methods.getLandsCount().call();
             for (let i = 1; i <= count; i++) {
                 const owner = await app.methods.getLandOwner(i).call();
-                if (!(await app.methods.isApproved(i).call()) || owner === account) continue;
+                if (!(await app.methods.isApproved(i).call()) || owner.toLowerCase() === account.toLowerCase()) continue;
                 const price = await app.methods.getPrice(i).call();
                 const isPaid = await app.methods.isPaid(i).call();
-                setLands((lands) => [...lands, { owner, price, isPaid }]);
+                setLands((lands) => [...lands, { owner, price, id: i, isPaid }]);
             }
         };
     }, [account]);
 
     const makePayment = async (seller_address, amount, land_id) => {
         amount *= 0.0000057;
-        await app.methods.payment(seller_address, land_id).send({
-            from: account,
-            value: getWeb3().utils.toWei(amount.toString(), "ether"),
-            gas: 2100000,
-        });
+        await app.methods
+            .payment(seller_address, land_id)
+            .send({
+                from: account,
+                value: getWeb3().utils.toWei(amount.toString(), "ether"),
+                gas: 2100000,
+            })
+            .then(() => window.location.reload());
     };
 
     return (
@@ -63,7 +66,7 @@ function Payment() {
                                                             <td>
                                                                 <button
                                                                     className="btn btn-primary"
-                                                                    onClick={() => makePayment(element.owner, element.price, index + 1)}
+                                                                    onClick={() => makePayment(element.owner, element.price, element.id)}
                                                                     disabled={element.isPaid}
                                                                 >
                                                                     Pay

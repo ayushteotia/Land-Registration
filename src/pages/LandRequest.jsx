@@ -13,7 +13,7 @@ function LandRequest() {
             for (let i = 1; i <= requestsCount; i++) {
                 const request = await app.methods.getRequestDetails(i).call();
                 const approved = await app.methods.isApproved(i).call();
-                if (address === request[0]) {
+                if (address.toUpperCase() === request[0].toUpperCase()) {
                     request[4] = approved;
                     setRequests((requests) => [...requests, request]);
                 }
@@ -66,7 +66,7 @@ function LandRequest() {
                                                             <td>
                                                                 <button
                                                                     className="btn btn-primary"
-                                                                    onClick={() => approveRequest(index + 1)}
+                                                                    onClick={() => approveRequest(element[2])}
                                                                     disabled={element[4]}
                                                                 >
                                                                     Approve

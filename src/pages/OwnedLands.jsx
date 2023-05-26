@@ -12,7 +12,7 @@ function OwnedLands() {
             const landsCount = await app.methods.getLandsCount().call();
             for (let i = 1; i <= landsCount; i++) {
                 const owner = await app.methods.getLandOwner(i).call();
-                if (owner !== account) continue;
+                if (owner.toUpperCase() !== account.toUpperCase()) continue;
                 const area = await app.methods.getArea(i).call();
                 const city = await app.methods.getCity(i).call();
                 const state = await app.methods.getState(i).call();
