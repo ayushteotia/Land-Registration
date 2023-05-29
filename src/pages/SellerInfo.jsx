@@ -32,6 +32,7 @@ function SellerInfo() {
                 const seller = await app.methods.getSellerDetails(sellers[i]).call();
                 const isVerified = await app.methods.isVerified(sellers[i]).call();
                 const isRejected = await app.methods.isRejected(sellers[i]).call();
+                if (isVerified || isRejected) continue;
                 const row = document.createElement("tr");
                 row.innerHTML = `<td>${i + 1}.</td><td>${sellers[i]}</td><td>${seller[0]}</td><td>${seller[1]}</td><td>${seller[4]}</td><td>${
                     seller[2]

@@ -51,10 +51,12 @@ function Home() {
                     </form>
                     {account.length <= 0 ? (
                         <button className="btn btn-success col-12 mt-2" onClick={handleOnboarding}>
-                            Connect
+                            Connect Wallet
                         </button>
                     ) : (
-                        <span className="badge rounded-pill text-bg-success">{account}</span>
+                        <span className="mt-4">
+                            Connected Account: <code>{account}</code>
+                        </span>
                     )}
                 </div>
             </div>

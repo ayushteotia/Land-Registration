@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import getWeb3 from "../getWeb3";
 import { app } from "../config";
 import { getHash } from "../getIPFS";
+import { useMetamask } from "../connectWallet";
 
 function Buyer() {
-    const to = useNavigate();
     const [name, setName] = useState("");
     const [age, setAge] = useState("");
     const [city, setCity] = useState("");
@@ -13,6 +12,7 @@ function Buyer() {
     const [panNumber, setPanNumber] = useState("");
     const [documentData, setDocumentData] = useState(null);
     const [email, setEmail] = useState("");
+    const { handleOnboarding } = useMetamask();
 
     const parse = async (file) => {
         const data = new FormData();
@@ -46,7 +46,7 @@ function Buyer() {
                     from: account[0],
                     gas: 2100000,
                 })
-                .then(() => to("/dashboard"));
+                .then(() => handleOnboarding());
         }
     };
 

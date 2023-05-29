@@ -2,6 +2,7 @@ import { useState } from "react";
 import getWeb3 from "../getWeb3";
 import { app } from "../config";
 import { getHash } from "../getIPFS";
+import { useMetamask } from "../connectWallet";
 
 function Seller() {
     const [name, setName] = useState("");
@@ -10,6 +11,7 @@ function Seller() {
     const [aadharNumber, setAadharNumber] = useState("");
     const [panNumber, setPanNumber] = useState("");
     const [documentData, setDocumentData] = useState(null);
+    const { handleOnboarding } = useMetamask();
 
     const parse = async (file) => {
         const data = new FormData();
@@ -37,10 +39,7 @@ function Seller() {
                     from: account[0],
                     gas: 2100000,
                 })
-                .then(() => {
-                    window.location.reload(true);
-                    window.location.href = "/dashboard";
-                });
+                .then(() => handleOnboarding());
         }
     };
 

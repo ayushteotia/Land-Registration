@@ -10,6 +10,7 @@ export const useMetamask = () => {
     function handleOnboarding() {
         if (MetaMaskOnboarding.isMetaMaskInstalled()) {
             window.ethereum?.request({ method: "eth_requestAccounts" }).then(async (accounts) => {
+                if (!accounts) return;
                 if (
                     window.localStorage.getItem("account_hash") !== accounts[0] ||
                     !window.localStorage.getItem("account_type") ||
