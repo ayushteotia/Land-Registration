@@ -27,7 +27,7 @@ function Lands() {
                 const image = await app.methods.getImage(i).call();
                 const document = await app.methods.getDocument(i).call();
                 const requested = await app.methods.isRequested(i).call();
-                setLands((lands) => [...lands, { area, city, state, price, propertyPID, surveyNum, image, document, requested }]);
+                setLands((lands) => [...lands, { area, city, state, price, propertyPID, surveyNum, image, document, requested, id: i }]);
             }
         };
     }, [address]);
@@ -81,7 +81,7 @@ function Lands() {
                                                 <td>
                                                     <button
                                                         className="btn btn-primary"
-                                                        onClick={() => requestLand(index + 1)}
+                                                        onClick={() => requestLand(element.id)}
                                                         disabled={(!isVerified && !isRejected) || element.requested}
                                                     >
                                                         Request
