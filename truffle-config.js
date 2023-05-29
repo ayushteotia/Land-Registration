@@ -1,6 +1,3 @@
-const HDWalletProvider = require("@truffle/hdwallet-provider");
-const { INFURA_API_KEY, MNEMONIC } = require("./secrets.json");
-
 module.exports = {
     networks: {
         development: {
@@ -8,10 +5,10 @@ module.exports = {
             port: 8545,
             network_id: "5777",
         },
-        sepolia: {
-            provider: () => new HDWalletProvider(MNEMONIC, "wss://sepolia.infura.io/ws/v3/" + INFURA_API_KEY),
-            network_id: "11155111",
-            gas: 30000000,
+        private: {
+            host: "43.204.114.104",
+            port: 8545,
+            network_id: "1685365916670",
         },
     },
     compilers: {
